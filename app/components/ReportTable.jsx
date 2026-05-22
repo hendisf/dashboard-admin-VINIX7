@@ -1,7 +1,7 @@
 'use client'
 
-import { supabase } from '../lib/supabase'
 import { useState } from 'react'
+import { supabase } from '../lib/supabase'
 
 export default function ReportTable({ reports, refreshReports, loading }) {
   const [updatingId, setUpdatingId] = useState(null)
@@ -15,7 +15,7 @@ export default function ReportTable({ reports, refreshReports, loading }) {
       .eq('id', id)
 
     if (error) {
-      console.log(error)
+      console.log('UPDATE ERROR:', error)
       setUpdatingId(null)
       return
     }
@@ -34,8 +34,9 @@ export default function ReportTable({ reports, refreshReports, loading }) {
 
           <thead>
             <tr className="text-slate-500 border-b">
-              <th className="py-3">Nama</th>
-              <th className="py-3">Laporan</th>
+              <th className="py-3">Judul</th>
+              <th className="py-3">Isi Laporan</th>
+              <th className="py-3">Lokasi</th>
               <th className="py-3">Status</th>
               <th className="py-3">Aksi</th>
             </tr>
@@ -45,18 +46,26 @@ export default function ReportTable({ reports, refreshReports, loading }) {
             {reports.map((report) => (
               <tr key={report.id} className="border-b">
 
+                {/* TITLE */}
                 <td className="py-3 font-medium text-slate-700">
-                  {report.name}
+                  {report.title || '-'}
                 </td>
 
+                {/* CONTENT */}
                 <td className="py-3 text-slate-600">
-                  {report.message}
+                  {report.content || '-'}
                 </td>
 
+                {/* LOCATION */}
+                <td className="py-3 text-slate-500">
+                  {report.location || '-'}
+                </td>
+
+                {/* STATUS */}
                 <td className="py-3">
                   <span className={`
                     px-3 py-1 rounded-full text-xs
-                    ${report.status === 'Done'
+                    ${report.status === 'selesai'
                       ? 'bg-green-100 text-green-600'
                       : 'bg-yellow-100 text-yellow-600'}
                   `}>
@@ -64,22 +73,23 @@ export default function ReportTable({ reports, refreshReports, loading }) {
                   </span>
                 </td>
 
+                {/* ACTION */}
                 <td className="py-3 flex gap-2">
 
                   <button
                     onClick={() => handleChangeStatus(report.id, 'dikirim')}
-                    className="px-3 py-1 text-xs rounded bg-yellow-500 text-white"
                     disabled={updatingId === report.id}
+                    className="px-3 py-1 text-xs rounded bg-yellow-500 text-white"
                   >
-                    Pending
+                    Dikirim
                   </button>
 
                   <button
-                    onClick={() => handleChangeStatus(report.id, 'Done')}
-                    className="px-3 py-1 text-xs rounded bg-green-600 text-white"
+                    onClick={() => handleChangeStatus(report.id, 'selesai')}
                     disabled={updatingId === report.id}
+                    className="px-3 py-1 text-xs rounded bg-green-600 text-white"
                   >
-                    Done
+                    Selesai
                   </button>
 
                 </td>
