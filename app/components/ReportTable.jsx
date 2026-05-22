@@ -15,7 +15,7 @@ export default function ReportTable({ reports, refreshReports, loading }) {
       .eq('id', id)
 
     if (error) {
-      console.log('UPDATE ERROR:', error)
+      console.log(error)
       setUpdatingId(null)
       return
     }
@@ -34,9 +34,7 @@ export default function ReportTable({ reports, refreshReports, loading }) {
 
           <thead>
             <tr className="text-slate-500 border-b">
-              <th className="py-3">Judul</th>
-              <th className="py-3">Isi Laporan</th>
-              <th className="py-3">Lokasi</th>
+              <th className="py-3">Laporan</th>
               <th className="py-3">Status</th>
               <th className="py-3">Aksi</th>
             </tr>
@@ -46,19 +44,9 @@ export default function ReportTable({ reports, refreshReports, loading }) {
             {reports.map((report) => (
               <tr key={report.id} className="border-b">
 
-                {/* TITLE */}
+                {/* LAPORAN (INI = TITLE) */}
                 <td className="py-3 font-medium text-slate-700">
                   {report.title || '-'}
-                </td>
-
-                {/* CONTENT */}
-                <td className="py-3 text-slate-600">
-                  {report.content || '-'}
-                </td>
-
-                {/* LOCATION */}
-                <td className="py-3 text-slate-500">
-                  {report.location || '-'}
                 </td>
 
                 {/* STATUS */}
@@ -79,7 +67,7 @@ export default function ReportTable({ reports, refreshReports, loading }) {
                   <button
                     onClick={() => handleChangeStatus(report.id, 'dikirim')}
                     disabled={updatingId === report.id}
-                    className="px-3 py-1 text-xs rounded bg-yellow-500 text-white"
+                    className="px-3 py-1 text-xs bg-yellow-500 text-white rounded"
                   >
                     Dikirim
                   </button>
@@ -87,7 +75,7 @@ export default function ReportTable({ reports, refreshReports, loading }) {
                   <button
                     onClick={() => handleChangeStatus(report.id, 'selesai')}
                     disabled={updatingId === report.id}
-                    className="px-3 py-1 text-xs rounded bg-green-600 text-white"
+                    className="px-3 py-1 text-xs bg-green-600 text-white rounded"
                   >
                     Selesai
                   </button>
