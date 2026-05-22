@@ -44,7 +44,7 @@ export default function ReportTable({ reports, refreshReports, loading }) {
             {reports.map((report) => (
               <tr key={report.id} className="border-b">
 
-                {/* LAPORAN (TITLE) */}
+                {/* LAPORAN (INI = TITLE) */}
                 <td className="py-3 font-medium text-slate-700">
                   {report.title || '-'}
                 </td>
@@ -61,19 +61,17 @@ export default function ReportTable({ reports, refreshReports, loading }) {
                   </span>
                 </td>
 
-                {/* AKSI */}
+                {/* ACTION */}
                 <td className="py-3 flex gap-2">
 
-                  {/* SET PENDING */}
                   <button
-                    onClick={() => handleChangeStatus(report.id, 'pending')}
+                    onClick={() => handleChangeStatus(report.id, 'dikirim')}
                     disabled={updatingId === report.id}
                     className="px-3 py-1 text-xs bg-yellow-500 text-white rounded"
                   >
-                    Pending
+                    Dikirim
                   </button>
 
-                  {/* SET SELESAI */}
                   <button
                     onClick={() => handleChangeStatus(report.id, 'selesai')}
                     disabled={updatingId === report.id}
