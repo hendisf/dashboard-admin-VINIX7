@@ -7,6 +7,7 @@ import StatsCard from './components/StatsCard'
 import ReportTable from './components/ReportTable'
 import { supabase } from './lib/supabase'
 
+export const dynamic = 'force-dynamic'
 export default function DashboardPage() {
 
   const [reports, setReports] = useState([])
