@@ -6,17 +6,7 @@ import { supabase } from '../lib/supabase'
 export default function ReportTable({ reports, refreshReports, loading }) {
   const [updatingId, setUpdatingId] = useState(null)
 
- async function handleChangeStatus(id, newStatus) {
-  console.log('CLICK:', id, newStatus)
-
-  const { data, error } = await supabase
-    .from('reports')
-    .update({ status: newStatus })
-    .eq('id', id)
-    .select()
-
-  console.log({ data, error })
-}
+ async function handleChangeStatus(id, newStatus) { setUpdatingId(id) const { error } = await supabase .from('reports') .update({ status: newStatus }) .eq('id', id) if (error) { console.log(error) setUpdatingId(null) return } await refreshReports() setUpdatingId(null) }
 
     await refreshReports()
     setUpdatingId(null)
