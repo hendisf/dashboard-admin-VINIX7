@@ -36,7 +36,7 @@ export default function DashboardPage() {
   }, [])
 
   const pending = reports.filter(r => r.status === 'dikirim').length
-  const done = reports.filter(r => r.status === 'Done').length
+  const done = reports.filter(r => r.status === 'selesai').length
 
   return (
     <div className="flex min-h-screen bg-slate-100">
@@ -48,6 +48,7 @@ export default function DashboardPage() {
 
         <div className="p-6">
 
+          {/* HEADER */}
           <div className="mb-6">
             <h1 className="text-3xl font-bold text-slate-800">
               Dashboard
