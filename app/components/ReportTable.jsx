@@ -53,23 +53,7 @@ export default function ReportTable({ reports, refreshReports, loading }) {
 
                 {/* DETAIL CONTEXT */}
                 <td className="py-3 text-slate-600 space-y-1">
-
-                  <p>
-                    <span className="font-semibold">Isi:</span> {report.content || '-'}
-                  </p>
-
-                  <p>
-                    <span className="font-semibold">Lokasi:</span> {report.location || '-'}
-                  </p>
-
-                  <p>
-                    <span className="font-semibold">Email:</span> {report.email || '-'}
-                  </p>
-
-                  <p>
-                    <span className="font-semibold">Tanggal:</span> {report.date || '-'}
-                  </p>
-
+                  {report.content || '-'}
                 </td>
 
                 {/* STATUS */}
